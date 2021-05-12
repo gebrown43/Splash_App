@@ -60,8 +60,8 @@ const App = () => {
   };
 
   //login input
-  const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
+  const [username, onChangeUsername] = React.useState("Username");
+  const [password, onChangePassword] = React.useState(null);
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -76,15 +76,14 @@ const App = () => {
           }}>
           <TextInput
             style={styles.input}
-            onChangeText={onChangeText}
-            value={text}
+            onChangeText={onChangeUsername}
+            value={username}
           />
           <TextInput
             style={styles.input}
-            onChangeText={onChangeNumber}
-            value={number}
-            placeholder="useless placeholder"
-            keyboardType="numeric"
+            onChangeText={onChangePassword}
+            value={password}
+            placeholder="Password"
           />
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.js</Text> to change this
