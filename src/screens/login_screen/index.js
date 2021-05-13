@@ -8,11 +8,11 @@ import {
     ImageBackground,
     StyleSheet,
 } from 'react-native';
-
 class LoginScreenComponent extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                <ImageBackground source={require('../../assets/images/Splash_background.png')} style={styles.image} >
                 <TextInput
             // style={styles.input}
             // onChangeText={onChangeUsername}
@@ -24,6 +24,7 @@ class LoginScreenComponent extends React.Component {
             // value={password}
             // placeholder="Password"
           />
+          </ImageBackground>
             </View>
         )
     }
@@ -32,7 +33,19 @@ class LoginScreenComponent extends React.Component {
 const styles = StyleSheet.create({
    container: {
        flex: 1,
-       backgroundColor: 'red',
+       flexDirection: "column"
+   },
+   image: {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center"
+   },
+   text: {
+        color: "white",
+        fontSize: 42,
+        fontWeight: "bold",
+        textAlign: "center",
+        backgroundColor: "#000000a0"
    },
   });
 
