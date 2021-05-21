@@ -1,13 +1,7 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  useColorScheme,
-} from 'react-native';
+import {View, StyleSheet, useColorScheme} from 'react-native';
 
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 import LoginScreen from './src/screens/login_screen';
 
@@ -18,15 +12,10 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  //login input
-  const [username, onChangeUsername] = React.useState("Username");
-  const [password, onChangePassword] = React.useState(null);
-
   return (
-      <View style={{flex: 1}}>
-      <LoginScreen
-          />
-      </View>  
+    <View style={{flex: 1}}>
+      <LoginScreen />
+    </View>
   );
 };
 
@@ -46,11 +35,6 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
-  },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
   },
 });
 
