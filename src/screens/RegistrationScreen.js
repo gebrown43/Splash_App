@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   StatusBar,
@@ -8,15 +8,23 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
+
 import image from '../assets/login_background.png';
+import {AuthContext} from '../lib/context/AuthContext/AuthContextProvider';
 
 const Registration = ({navigation}) => {
-  const [name, setName] = useState('');
+  const {registerAccount} = useContext(AuthContext);
+  const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const onRegistrationPress = () => {
-    console.log(name, email, password);
+  const onRegisterPress = () => {
+    if (password !== confirmPassword) {
+      alert("Passwords don't match.");
+      return;
+    }
+    registerAccount(displayName, email, password);
   };
 
   const onFooterLinkPress = () => {
@@ -32,10 +40,10 @@ const Registration = ({navigation}) => {
           <View style={styles.inputView}>
             <TextInput
               style={styles.textInput}
-              placeholder="Name"
+              placeholder="Display Name"
               placeholderTextColor="#FFF"
-              onChangeText={text => setName(text)}
-              value={name}
+              onChangeText={text => setDisplayName(text)}
+              value={displayName}
             />
           </View>
 
@@ -60,9 +68,20 @@ const Registration = ({navigation}) => {
             />
           </View>
 
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.textInput}
+              placeholder="Confirm Password"
+              placeholderTextColor="#FFF"
+              secureTextEntry={true}
+              onChangeText={text => setConfirmPassword(text)}
+              value={confirmPassword}
+            />
+          </View>
+
           <TouchableOpacity
             style={styles.registrationBtn}
-            onPress={() => onRegistrationPress()}>
+            onPress={() => onRegisterPress()}>
             <Text style={styles.registrationText}>Sign Up</Text>
           </TouchableOpacity>
         </View>
@@ -103,7 +122,7 @@ const styles = StyleSheet.create({
   bodyContainer: {
     flex: 1,
     width: '100%',
-    marginTop: 240,
+    marginTop: 200,
     alignItems: 'center',
   },
 

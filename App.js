@@ -1,10 +1,12 @@
 import 'react-native-gesture-handler';
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {decode, encode} from 'base-64';
+
 import {HomeScreen, LoginScreen, RegistrationScreen} from './src/screens';
 import HeaderIcons from './src/components/HeaderIcons';
+import {AuthContext} from './src/lib/context/AuthContext/AuthContextProvider';
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -15,34 +17,34 @@ if (!global.atob) {
 
 const Stack = createStackNavigator();
 
-export default function App() {
-  const [user, setUser] = useState(true);
+export default function App({navigation}) {
+  const {currentUser, currentUserLoading} = useContext(AuthContext);
 
-import 'react-native-gesture-handler';
-import React, {useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {HomeScreen, LoginScreen, RegistrationScreen} from './src/screens';
-import {decode, encode} from 'base-64';
-if (!global.btoa) {
-  global.btoa = encode;
-}
-if (!global.atob) {
-  global.atob = decode;
-}
-
-const Stack = createStackNavigator();
-
-export default function App() {
-  const [user, setUser] = useState(true);
+  if (currentUserLoading) {
+    return <></>;
+  }
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {user ? (
-          <Stack.Screen name="Home">
-            {props => <HomeScreen {...props} extraData={user} />}
-          </Stack.Screen>
+        {currentUser ? (
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{
+              title: 'Splash',
+              headerStyle: {
+                backgroundColor: '#092235',
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+                fontSize: 30,
+                paddingBottom: 5,
+              },
+              headerRight: () => <HeaderIcons navigation={navigation} />,
+            }}
+          />
         ) : (
           <>
             <Stack.Screen

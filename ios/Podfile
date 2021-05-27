@@ -11,6 +11,7 @@ target 'splash_app' do
     # to enable hermes on iOS, change `false` to `true` and then install pods
     :hermes_enabled => false
   )
+  pod 'Firebase/Analytics'
 
   target 'splash_appTests' do
     inherit! :complete
