@@ -21,7 +21,7 @@ const HomeScreen = () => {
       <StatusBar barStyle="light-content" />
 
       {photos?.map(photo => (
-        <ImageToolbar photo={photo} />
+        <ImageToolbar key={photo.id} photo={photo} />
       ))}
     </ScrollView>
   );
