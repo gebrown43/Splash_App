@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 
-import ImageVerticalIndex from '../components/ImageVerticalIndex';
+import VerticalImageIndex from '../components/VerticalImageIndex';
 
 const HomeScreen = () => {
   const [photos, setPhotos] = useState(null);
@@ -19,16 +19,16 @@ const HomeScreen = () => {
   return (
     <FlatList
       data={photos}
-      style={styles.scrollView}
+      style={styles.flatList}
       renderItem={({item}) => {
-        return <ImageVerticalIndex photo={item} />;
+        return <VerticalImageIndex photo={item} />;
       }}
     />
   );
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
+  flatList: {
     display: 'flex',
     backgroundColor: '#092235',
   },
