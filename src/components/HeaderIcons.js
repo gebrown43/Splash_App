@@ -9,18 +9,12 @@ import Profile from '../assets/Profile';
 const HeaderIcons = () => {
   const {signOut} = useContext(AuthContext);
 
-  const onSignoutPress = () => {
-    signOut();
-  };
-
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.heartContainer}
-        onPress={() => onSignoutPress()}>
+      <TouchableOpacity style={styles.heartContainer} onPress={signOut}>
         <Heart />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => onSignoutPress()}>
+      <TouchableOpacity onPress={signOut}>
         <Profile />
       </TouchableOpacity>
     </View>

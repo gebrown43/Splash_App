@@ -42,7 +42,7 @@ const Registration = ({navigation}) => {
               style={styles.textInput}
               placeholder="Display Name"
               placeholderTextColor="#FFF"
-              onChangeText={text => setDisplayName(text)}
+              onChangeText={setDisplayName}
               value={displayName}
             />
           </View>
@@ -52,7 +52,7 @@ const Registration = ({navigation}) => {
               style={styles.textInput}
               placeholder="Email"
               placeholderTextColor="#FFF"
-              onChangeText={text => setEmail(text)}
+              onChangeText={setEmail}
               value={email}
             />
           </View>
@@ -63,7 +63,7 @@ const Registration = ({navigation}) => {
               placeholder="Password"
               placeholderTextColor="#FFF"
               secureTextEntry={true}
-              onChangeText={text => setPassword(text)}
+              onChangeText={setPassword}
               value={password}
             />
           </View>
@@ -74,14 +74,14 @@ const Registration = ({navigation}) => {
               placeholder="Confirm Password"
               placeholderTextColor="#FFF"
               secureTextEntry={true}
-              onChangeText={text => setConfirmPassword(text)}
+              onChangeText={setConfirmPassword}
               value={confirmPassword}
             />
           </View>
 
           <TouchableOpacity
             style={styles.registrationBtn}
-            onPress={() => onRegisterPress()}>
+            onPress={onRegisterPress}>
             <Text style={styles.registrationText}>Sign Up</Text>
           </TouchableOpacity>
         </View>
