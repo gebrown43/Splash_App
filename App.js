@@ -1,17 +1,11 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import 'react-native-gesture-handler';
 import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {HomeScreen, LoginScreen, RegistrationScreen} from './src/screens';
 import {decode, encode} from 'base-64';
+import {HomeScreen, LoginScreen, RegistrationScreen} from './src/screens';
+import HeaderIcons from './src/components/HeaderIcons';
+
 if (!global.btoa) {
   global.btoa = encode;
 }
@@ -28,7 +22,21 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         {user ? (
-          <Stack.Screen name="Home">
+          <Stack.Screen
+            name="Home"
+            options={{
+              title: 'Splash',
+              headerStyle: {
+                backgroundColor: '#092235',
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+                fontSize: 30,
+                paddingBottom: 5,
+              },
+              headerRight: () => <HeaderIcons />,
+            }}>
             {props => <HomeScreen {...props} extraData={user} />}
           </Stack.Screen>
         ) : (
