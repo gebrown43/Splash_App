@@ -1,33 +1,44 @@
 import React from 'react';
-import {Text, View, Image, StatusBar, StyleSheet} from 'react-native';
-import Heart from '../assets/Heart';
+import {
+  View,
+  Image,
+  StatusBar,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+
+import ImageToolbar from './ImageToolbar';
 
 const VerticalImageIndex = ({photo}) => {
-  return (
-    <View style={styles.photoContainer} key={photo.id}>
-      <StatusBar barStyle="light-content" />
-      <Image style={styles.image} source={{uri: photo?.urls.regular}} />
-      <View style={styles.bottomToolbar}>
-        <Image
-          style={styles.avatar}
-          source={{uri: photo?.user.profile_image.small}}
-        />
+  const navigation = useNavigation();
 
-        <Text style={styles.username}>{photo?.user.username}</Text>
-        <View style={styles.heartIcon}>
-          <Heart />
-        </View>
-      </View>
+  const onImagePress = () => {
+    navigation.push('Image', {photo});
+  };
+
+  return (
+    <View style={styles.container} key={photo.id}>
+      <StatusBar barStyle="light-content" />
+      <TouchableOpacity style={styles.photoContainer} onPress={onImagePress}>
+        <Image style={styles.image} source={{uri: photo?.urls.regular}} />
+
+        <ImageToolbar photo={photo} />
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  photoContainer: {
+  container: {
     alignItems: 'center',
     display: 'flex',
     marginBottom: 14,
     paddingTop: 10,
+  },
+  photoContainer: {
+    width: '100%',
+    alignItems: 'center',
   },
   image: {
     width: '90%',
