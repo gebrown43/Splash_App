@@ -1,10 +1,11 @@
 import React from 'react';
-import {Text, View, Image, StyleSheet} from 'react-native';
+import {Text, View, Image, StatusBar, StyleSheet} from 'react-native';
 import Heart from '../assets/Heart';
 
 const VerticalImageIndex = ({photo}) => {
   return (
     <View style={styles.photoContainer} key={photo.id}>
+      <StatusBar barStyle="light-content" />
       <Image style={styles.image} source={{uri: photo?.urls.regular}} />
       <View style={styles.bottomToolbar}>
         <Image

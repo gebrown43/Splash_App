@@ -3,6 +3,7 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <Firebase.h>
 
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
@@ -36,6 +37,10 @@ static void InitializeFlipper(UIApplication *application) {
                                                    moduleName:@"splash_app"
                                             initialProperties:nil];
 
+  if ([FIRApp defaultApp] == nil) {
+    [FIRApp configure];
+  }
+  
   if (@available(iOS 13.0, *)) {
       rootView.backgroundColor = [UIColor systemBackgroundColor];
   } else {

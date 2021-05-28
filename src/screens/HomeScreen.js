@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, StyleSheet} from 'react-native';
+import config from 'react-native-config';
 
 import VerticalImageIndex from '../components/VerticalImageIndex';
 
@@ -8,7 +9,7 @@ const HomeScreen = () => {
 
   useEffect(() => {
     fetch(
-      'https://api.unsplash.com/photos/?client_id=Pfsu-9Fcu8eaLxSJSYQlXmxoaS3X90KHGJ8AlSJndnE',
+      `https://api.unsplash.com/photos/?client_id=${config.UNSPLASH_APP_CLIENT_ID}`,
     )
       .then(response => response.json())
       .then(data => {
@@ -16,14 +17,12 @@ const HomeScreen = () => {
       });
   }, []);
 
+  const renderPhotos = ({item}) => {
+    return <VerticalImageIndex photo={item} />;
+  };
+
   return (
-    <FlatList
-      data={photos}
-      style={styles.flatList}
-      renderItem={({item}) => {
-        return <VerticalImageIndex photo={item} />;
-      }}
-    />
+    <FlatList data={photos} style={styles.flatList} renderItem={renderPhotos} />
   );
 };
 

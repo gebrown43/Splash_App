@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {firebase} from '../../../firebase/config';
 import {createContext} from 'react';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 export const AuthContext = createContext(null);
 
@@ -9,22 +10,20 @@ const AuthContextProvider = ({children}) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const unsubscribeFromAuth = firebase
-      .auth()
-      .onAuthStateChanged(async userAuth => {
-        if (userAuth) {
-          const userRef = await createUserProfileDocument(userAuth);
-          userRef.onSnapshot(snapShot => {
-            setCurrentUser({
-              id: snapShot.id,
-              ...snapShot.data(),
-            });
+    const unsubscribeFromAuth = auth().onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+        userRef.onSnapshot(snapShot => {
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data(),
           });
-        }
-        setLoading(false);
+        });
+      }
+      setLoading(false);
 
-        setCurrentUser(userAuth);
-      });
+      setCurrentUser(userAuth);
+    });
 
     return () => {
       unsubscribeFromAuth();
@@ -36,7 +35,7 @@ const AuthContextProvider = ({children}) => {
       return;
     }
 
-    const userRef = firebase.firestore().doc(`users/${userAuth.uid}`);
+    const userRef = firestore().doc(`users/${userAuth.uid}`);
     const snapShot = await userRef.get();
 
     if (!snapShot.exists) {
@@ -51,7 +50,7 @@ const AuthContextProvider = ({children}) => {
           ...additionalData,
         });
       } catch (error) {
-        console.log('error creating user', error.message);
+        alert(error.message);
       }
     }
 
@@ -60,30 +59,28 @@ const AuthContextProvider = ({children}) => {
 
   const signIn = async (email, password) => {
     try {
-      const user = await firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password);
+      const user = await auth().signInWithEmailAndPassword(email, password);
       setCurrentUser(user);
     } catch (e) {
-      alert(e);
+      alert(e.message);
     }
   };
 
   const signOut = () => {
-    firebase
-      .auth()
+    auth()
       .signOut()
       .then(() => {
         alert("You've been successfully signed out");
       })
-      .catch(e => alert(e));
+      .catch(e => alert(e.message));
   };
 
   const registerAccount = async (displayName, email, password) => {
     try {
-      const {user} = await firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password);
+      const {user} = await auth().createUserWithEmailAndPassword(
+        email,
+        password,
+      );
 
       await createUserProfileDocument(user, {displayName});
 
