@@ -5,6 +5,10 @@ import App from './App';
 import {name as appName} from './app.json';
 import AuthProvider from './src/lib/context/AuthContext/AuthContextProvider';
 
+if (__DEV__) {
+  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
+}
+
 const AppProviders = () => (
   <AuthProvider>
     <App />
