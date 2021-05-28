@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   StatusBar,
@@ -8,14 +8,17 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
+
+import {AuthContext} from '../lib/context/AuthContext/AuthContextProvider';
 import image from '../assets/login_background.png';
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {signIn} = useContext(AuthContext);
 
   const onLoginPress = () => {
-    console.log(email, password);
+    signIn(email, password);
   };
 
   const onFooterLinkPress = () => {

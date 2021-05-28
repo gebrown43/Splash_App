@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "285786633759",
+    "project_id": "splash-app-wl",
+    "storage_bucket": "splash-app-wl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285786633759:android:edac842319a6942806872a",
+        "android_client_info": {
+          "package_name": "com.reactnativefirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285786633759-6umt9adm8p7babtvm9f2pnnjg9eqgp3i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNAD1Xe696zjIK9q_awjmJjm8QkTpFrSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285786633759-6umt9adm8p7babtvm9f2pnnjg9eqgp3i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "285786633759-7mehj3n7klbumacq1o3o8t54rovoh0pe.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.reactnativefirebase"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

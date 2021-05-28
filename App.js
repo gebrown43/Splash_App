@@ -1,10 +1,12 @@
 import 'react-native-gesture-handler';
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {decode, encode} from 'base-64';
+
 import {HomeScreen, LoginScreen, RegistrationScreen} from './src/screens';
 import HeaderIcons from './src/components/HeaderIcons';
+import {AuthContext} from './src/lib/context/AuthContext/AuthContextProvider';
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -15,15 +17,20 @@ if (!global.atob) {
 
 const Stack = createStackNavigator();
 
-export default function App() {
-  const [user, setUser] = useState(true);
+export default function App({navigation}) {
+  const {currentUser, currentUserLoading} = useContext(AuthContext);
+
+  if (currentUserLoading) {
+    return <></>;
+  }
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {user ? (
+        {currentUser ? (
           <Stack.Screen
             name="Home"
+            component={HomeScreen}
             options={{
               title: 'Splash',
               headerStyle: {
@@ -35,10 +42,9 @@ export default function App() {
                 fontSize: 30,
                 paddingBottom: 5,
               },
-              headerRight: () => <HeaderIcons />,
-            }}>
-            {props => <HomeScreen {...props} extraData={user} />}
-          </Stack.Screen>
+              headerRight: () => <HeaderIcons navigation={navigation} />,
+            }}
+          />
         ) : (
           <>
             <Stack.Screen
