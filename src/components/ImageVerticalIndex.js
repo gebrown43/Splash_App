@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View, Image, StyleSheet} from 'react-native';
 import Heart from '../assets/Heart';
 
-const ImageToolbar = ({photo}) => {
+const ImageVerticalIndex = ({photo}) => {
   return (
     <View style={styles.photoContainer} key={photo.id}>
       <Image style={styles.image} source={{uri: photo?.urls.regular}} />
@@ -61,4 +61,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ImageToolbar;
+export default ImageVerticalIndex;

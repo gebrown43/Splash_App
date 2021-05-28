@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {StatusBar, StyleSheet, ScrollView} from 'react-native';
+import {FlatList, StyleSheet} from 'react-native';
 
-import ImageToolbar from '../components/ImageToolbar';
+import ImageVerticalIndex from '../components/ImageVerticalIndex';
 
 const HomeScreen = () => {
   const [photos, setPhotos] = useState(null);
@@ -17,13 +17,13 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <ScrollView style={styles.scrollView}>
-      <StatusBar barStyle="light-content" />
-
-      {photos?.map(photo => (
-        <ImageToolbar key={photo.id} photo={photo} />
-      ))}
-    </ScrollView>
+    <FlatList
+      data={photos}
+      style={styles.scrollView}
+      renderItem={({item}) => {
+        return <ImageVerticalIndex photo={item} />;
+      }}
+    />
   );
 };
 
