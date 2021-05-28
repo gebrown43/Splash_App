@@ -55,8 +55,7 @@ export default function App({navigation}) {
             <Stack.Screen
               name="Image"
               component={ImageScreen}
-              options={route => ({
-                name: '',
+              options={() => ({
                 headerTransparent: true,
                 headerStyle: {
                   backgroundColor: '#000',
