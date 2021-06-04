@@ -17,7 +17,7 @@ const ImageToolbar = ({photo, fullScreen}) => {
         fullScreen
           ? {
               ...styles.bottomToolbar,
-              ...styles.bottomToolbarFillSize,
+              ...styles.bottomToolbarFullSize,
             }
           : styles.bottomToolbar
       }>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
   },
-  bottomToolbarFillSize: {
+  bottomToolbarFullSize: {
     width: '100%',
     height: '10%',
     paddingBottom: 5,
