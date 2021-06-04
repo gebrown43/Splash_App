@@ -1,15 +1,23 @@
 import React from 'react';
-import {Text, View, Image, StyleSheet} from 'react-native';
+import {Text, View, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+
 import Heart from '../assets/Heart';
 
 const ImageToolbar = ({photo, fullScreen}) => {
+  const navigation = useNavigation();
+
+  const onUserPress = () => {
+    navigation.navigate('Bio', {photo});
+  };
+
   return (
     <View
       style={
         fullScreen
           ? {
               ...styles.bottomToolbar,
-              ...styles.bottomToolbarFillSize,
+              ...styles.bottomToolbarFullSize,
             }
           : styles.bottomToolbar
       }>
@@ -18,7 +26,9 @@ const ImageToolbar = ({photo, fullScreen}) => {
         source={{uri: photo?.user.profile_image.small}}
       />
 
-      <Text style={styles.username}>{photo?.user.username}</Text>
+      <TouchableOpacity style={styles.usernameContainer} onPress={onUserPress}>
+        <Text style={styles.username}>{photo?.user.username}</Text>
+      </TouchableOpacity>
       <View style={styles.heartIcon}>
         <Heart />
       </View>
@@ -36,7 +46,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
   },
-  bottomToolbarFillSize: {
+  bottomToolbarFullSize: {
     width: '100%',
     height: '10%',
     paddingBottom: 5,
@@ -47,13 +57,16 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     marginLeft: 7,
   },
-  username: {
+  usernameContainer: {
     fontFamily: 'Helvetica Neue',
     fontWeight: '300',
     fontSize: 13,
     color: '#FFF',
     paddingLeft: 6,
     flex: 1,
+  },
+  username: {
+    color: '#FFF',
   },
   heartIcon: {
     marginRight: 12,

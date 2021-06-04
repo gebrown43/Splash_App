@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 import config from 'react-native-config';
-import Reactotron from 'reactotron-react-native';
 
 import VerticalImageIndex from '../components/VerticalImageIndex';
 
