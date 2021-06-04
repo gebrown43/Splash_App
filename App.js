@@ -9,6 +9,7 @@ import {
   ImageScreen,
   LoginScreen,
   RegistrationScreen,
+  BioScreen,
 } from './src/screens';
 import HeaderIcons from './src/components/HeaderIcons';
 import {AuthContext} from './src/lib/context/AuthContext/AuthContextProvider';
@@ -55,13 +56,17 @@ export default function App({navigation}) {
             <Stack.Screen
               name="Image"
               component={ImageScreen}
-              options={route => ({
-                name: '',
+              options={() => ({
                 headerTransparent: true,
-                headerStyle: {
-                  backgroundColor: '#000',
-                  opacity: 0.5,
-                },
+                headerTitle: false,
+                headerLeft: () => <BackButton />,
+              })}
+            />
+            <Stack.Screen
+              name="Bio"
+              component={BioScreen}
+              options={() => ({
+                headerTransparent: true,
                 headerTitle: false,
                 headerLeft: () => <BackButton />,
               })}
